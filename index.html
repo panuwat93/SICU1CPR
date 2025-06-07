@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SMART CPR - Sci-Fi Theme</title>
+
+<!-- Manifest for PWA -->
+<link rel="manifest" href="manifest.json" />
+
+<!-- Import Orbitron font for sci-fi vibe -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Athiti:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Sci-Fi Neon Dark Theme Palette */
+    --color-bg: #0a0f1a;
+    --color-primary: #00ffea; /* Neon cyan for primary headings and highlights */
+    --color-secondary: #ff00d6; /* Neon magenta for accents */
+    --color-text-primary: #e0fbfc; /* Soft bright text */
+    --color-text-secondary: #7fdbff; /* Soft blue for less emphasis text */
+    --color-border: #004f5b; /* Dark teal border */
+    --color-shadow: rgba(0, 255, 234, 0.4);
+    --color-button-bg: #005f73;
+    --color-button-bg-hover: #008891;
+    --font-family-sf: 'Orbitron', 'Athiti', sans-serif;
+
+    /* Glow shadows */
+    --glow-primary: 0 0 8px #00ffea, 0 0 20px #00ffea;
+    --glow-secondary: 0 0 6px #ff00d6, 0 0 15px #ff00d6;
+  }
+
+  /* Reset and base styles */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 4rem 2rem 6rem;
+    background: var(--color-bg);
+    font-family: var(--font-family-sf);
+    color: var(--color-text-secondary);
+    font-size: 18px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0 1rem;
+  }
+
+  /* Position SMART CPR on top by order */
+  h1 {
+    order: -1; /* ensures h1 is rendered before others */
+    font-family: 'Orbitron', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 3rem;
+    letter-spacing: 0.05em;
+    text-shadow: var(--glow-primary);
+  }
+  
+  /* Patient info card - neon glass morphism */
+  #patient-info {
+    background: rgba(0, 255, 234, 0.07);
+    backdrop-filter: blur(8px) saturate(180%);
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--glow-primary);
+    padding: 1.75rem 2.5rem;
+    color: var(--color-text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Athiti', sans-serif;
+  }
+  #patient-info > div {
+    display: flex;
+    flex-direction: column;
+  }
+  #patient-info label {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: var(--color-primary);
+    text-shadow: var(--glow-primary);
+  }
+  #patient-info input[type="text"] {
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    font-size: 1.1rem;
+    font-family: var(--font-family-sf);
+    color: var(--color-text-primary);
+    background: rgba(0, 255, 234, 0.12);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 4px #004f5b inset;
+  }
+  #patient-info input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: var(--glow-secondary);
+    background: rgba(255, 0, 214, 0.15);
+  }
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    text-shadow: var(--glow-secondary);
+  }
+
+  /* Timer display with neon glow */
+  .timer-display {
+    font-family: 'Orbitron', monospace;
+    font-size: 96px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-primary);
+    font-variant-numeric: tabular-nums;
+    user-select: none;
+    padding: 1.5rem 0 2.5rem;
+    text-shadow: var(--glow-primary);
+  }
+
+  /* Buttons base with futuristic neon style - smaller */
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  button {
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    background-color: transparent;
+    color: var(--color-primary);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    padding: 0.9rem 0.9rem 0.7rem;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease,
+      border-color 0.3s ease;
+    box-shadow: 0 0 12px #00fff7aa;
+    user-select: none;
+    line-height: 1.2;
+  }
+  button svg {
+    stroke: var(--color-primary);
+    stroke-width: 2.5;
+    fill: none;
+    width: 40px;
+    height: 40px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    margin-bottom: 0.4rem;
+    filter: drop-shadow(0 0 3px var(--color-primary));
+  }
+  button:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 4px;
+  }
+  button:not(:disabled):hover {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    border-color: var(--color-secondary);
+    box-shadow:
+      0 0 18px var(--color-primary),
+      0 0 20px var(--color-secondary),
+      0 0 22px var(--color-secondary);
+    transform: translateY(-2px) scale(1.06);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  button:disabled {
+    opacity: 0.3;
+    cursor: default;
+    box-shadow: none;
+    transform: none;
+    color: #23505f;
+    background-color: transparent;
+    border-color: #003040;
+  }
+
+  /* Neon color variants for buttons */
+  .btn-green { border-color: #00ffea; color: #00ffea; }
+  .btn-red { border-color: #ff00d6; color: #ff00d6; }
+  .btn-blue { border-color: #4bcaff; color: #4bcaff; }
+  .btn-yellow { border-color: #ffdd00; color: #ffdd00; }
+  .btn-purple { border-color: #bf00ff; color: #bf00ff; }
+  .btn-pink { border-color: #ff40b4; color: #ff40b4; }
+  .btn-orange { border-color: #ff6f00; color: #ff6f00; }
+  .btn-brown { border-color: #663300; color: #663300; }
+  .btn-reset { border-color: #008080; color: #008080; }
+  .btn-save { border-color: var(--color-primary); color: var(--color-primary); }
+  .btn-back { border-color: #006666; color: #006666; }
+
+  /* Submenus with neon glow */
+  .subbuttons {
+    display: none;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .subbuttons.active {
+    display: flex;
+  }
+
+  /* Log area - transparent dark glass - neon text */
+  .log-area {
+    background: rgba(0, 15, 30, 0.6);
+    border-radius: 1rem;
+    padding: 1.75rem 2.5rem;
+    max-height: 320px;
+    overflow-y: auto;
+    color: var(--color-primary);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 0 20px var(--color-primary);
+    white-space: pre-wrap;
+    line-height: 1.5;
+    text-shadow:
+      0 0 2px #00fff7,
+      0 0 5px #00fff7,
+      0 0 8px #00fff7;
+  }
+  .log-entry {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Summary box - neon cyan */
+  #summary {
+    background: rgba(0, 255, 234, 0.15);
+    color: var(--color-primary);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 1.75rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px var(--color-primary);
+    white-space: pre-line;
+    text-align: center;
+    text-shadow: var(--glow-primary);
+  }
+
+  /* Alert Overlay with strong neon glow */
+  #alert-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 10, 20, 0.95);
+    color: var(--color-primary);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem;
+    border-radius: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.4s ease;
+    text-shadow:
+      0 0 10px #00fff7,
+      0 0 20px #00fff7,
+      0 0 40px #00fff7,
+      0 0 80px #00fff7;
+    z-index: 9999;
+  }
+  #alert-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Action buttons container */
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    button {
+      width: 110px;
+      height: 110px;
+      font-size: 0.9rem;
+    }
+    .timer-display {
+      font-size: 64px;
+    }
+    #patient-info {
+      max-width: 100%;
+      padding: 1rem 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="container" role="main" aria-label="SMART CPR">
+
+  <h1>SICU1 SMART CPR</h1>
+
+  <!-- Patient Information inputs -->
+  <section id="patient-info" aria-label="ข้อมูลผู้ป่วย">
+    <div>
+      <label for="patient-name">ชื่อผู้ป่วย</label>
+      <input type="text" id="patient-name" name="patient-name" placeholder="กรอกชื่อผู้ป่วย" autocomplete="off" />
+    </div>
+    <div>
+      <label for="hn">HN</label>
+      <input type="text" id="hn" name="hn" placeholder="กรอก HN" autocomplete="off" />
+    </div>
+    <div>
+      <label for="an">AN</label>
+      <input type="text" id="an" name="an" placeholder="กรอก AN" autocomplete="off" />
+    </div>
+  </section>
+
+  <div class="timer-display" id="main-timer" aria-live="polite" aria-atomic="true" aria-label="เวลานับขึ้น">00:00</div>
+
+  <!-- Main navigation buttons -->
+  <nav class="button-row" role="group" aria-label="ปุ่มหลัก">
+    <button id="start-btn" class="btn-green" aria-pressed="false" aria-label="ปุ่มเริ่มจับเวลาแอพ CPR">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" >
+        <polygon points="5 3 19 12 5 21" stroke="currentColor" />
+      </svg>
+      START CPR
+    </button>
+    <button id="stop-btn" class="btn-red" aria-pressed="false" disabled aria-label="ปุ่มหยุดจับเวลาแอพ CPR">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" >
+        <rect x="6" y="6" width="12" height="12" rx="3" ry="3" stroke="currentColor" />
+      </svg>
+      STOP CPR
+    </button>
+    <button id="ekg-btn" class="btn-blue" aria-expanded="false" aria-controls="ekg-subbuttons" aria-label="ปุ่มแสดงเมนูย่อย EKG">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" >
+        <polyline points="2 12 6 12 9 6 13 18 16 12 22 12" stroke="currentColor" />
+      </svg>
+      EKG
+    </button>
+  </nav>
+
+  <!-- EKG submenus - main level -->
+  <section id="ekg-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย EKG">
+    <button class="btn-green ekg-subbtn" data-sub="bradycardia" aria-label="ปุ่มเมนู Bradycardia สีเขียว">Bradycardia</button>
+    <button class="btn-yellow ekg-subbtn" data-sub="asystole" aria-label="ปุ่มเมนู Asytole สีเหลือง">Asytole</button>
+    <button class="btn-purple ekg-subbtn" data-sub="pea" aria-label="ปุ่มเมนู PEA สีม่วง">PEA</button>
+    <button class="btn-blue ekg-subbtn" data-sub="pulseless-vt" aria-label="ปุ่มเมนู Pulseless VT สีฟ้า">Pulseless VT</button>
+    <button class="btn-pink ekg-subbtn" data-sub="vf" aria-label="ปุ่มเมนู VF สีชมพู">VF</button>
+    <button class="btn-brown ekg-subbtn" data-sub="sinus-tachycardia" aria-label="ปุ่มเมนู Sinus Tachycardia สีน้ำตาล">Sinus Tachycardia</button>
+    <button class="btn-red ekg-subbtn" data-sub="af" aria-label="ปุ่มเมนู AF สีแดง">AF</button>
+    <button class="btn-orange ekg-subbtn" data-sub="svt" aria-label="ปุ่มเมนู SVT สีส้ม">SVT</button>
+  </section>
+
+  <!-- Back button shared style -->
+  <div id="back-container" class="button-row" style="display:none; justify-content:center; margin-bottom:1rem;">
+    <button id="back-btn" class="btn-back" aria-label="กลับหน้าหลัก">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none" width="40" height="40" style="margin-bottom:0;">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      BACK
+    </button>
+  </div>
+
+  <!-- Submenu detail sections -->
+  <section id="bradycardia-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย Bradycardia">
+    <button id="atropine-btn" class="btn-green" aria-pressed="false" aria-label="Atropine 1 mg">Atropine 1 mg</button>
+    <button class="brady-subbtn btn-green" aria-label="Dopamine 5-20 mcg/kg/min">Dopamine 5-20 mcg/kg/min</button>
+    <button class="brady-subbtn btn-green" aria-label="Adrenaline 2-10 mcg/kg/min">Adrenaline 2-10 mcg/kg/min</button>
+    <button class="brady-subbtn btn-green" aria-label="Transvenous Pacing">Transvenous Pacing</button>
+  </section>
+
+  <section id="asystole-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย Asytole">
+    <button id="adrenaline-asy-btn" class="btn-yellow" aria-pressed="false" aria-label="Adenaline 1 :10,000">Adenaline 1 :10,000</button>
+    <button class="asy-subbtn btn-yellow" aria-label="0.9%NSS 1 L IV load">0.9%NSS 1 L IV load</button>
+    <button class="asy-subbtn btn-yellow" aria-label="7.5%NaHCO3 50 ml">7.5%NaHCO3 50 ml</button>
+    <button class="asy-subbtn btn-yellow" aria-label="50%glucose 50 ml">50%glucose 50 ml</button>
+    <button class="asy-subbtn btn-yellow" aria-label="RI 10 u + 50%glucose 50 ml">RI 10 u + 50%glucose 50 ml</button>
+    <button class="asy-subbtn btn-yellow" aria-label="10%calcium 10 ml">10%calcium 10 ml</button>
+    <button class="asy-subbtn btn-yellow" aria-label="PRC">PRC</button>
+    <button class="asy-subbtn btn-yellow" aria-label="FFP">FFP</button>
+  </section>
+
+  <section id="pea-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย PEA">
+    <button id="adrenaline-pea-btn" class="btn-purple" aria-pressed="false" aria-label="Adenaline 1 :10,000">Adenaline 1 :10,000</button>
+    <button class="pea-subbtn btn-purple" aria-label="0.9%NSS 1 L IV load">0.9%NSS 1 L IV load</button>
+    <button class="pea-subbtn btn-purple" aria-label="7.5%NaHCO3 50 ml">7.5%NaHCO3 50 ml</button>
+    <button class="pea-subbtn btn-purple" aria-label="50%glucose 50 ml">50%glucose 50 ml</button>
+    <button class="pea-subbtn btn-purple" aria-label="RI 10 u + 50%glucose 50 ml">RI 10 u + 50%glucose 50 ml</button>
+    <button class="pea-subbtn btn-purple" aria-label="10%calcium 10 ml">10%calcium 10 ml</button>
+    <button class="pea-subbtn btn-purple" aria-label="PRC">PRC</button>
+    <button class="pea-subbtn btn-purple" aria-label="FFP">FFP</button>
+  </section>
+
+  <section id="pulseless-vt-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย Pulseless VT">
+    <button class="pv-subbtn btn-blue" aria-label="Defrib 200 J">Defrib 200 J</button>
+    <button id="adrenaline-pv-btn" class="btn-blue" aria-pressed="false" aria-label="Adenaline 1 :10,000">Adenaline 1 :10,000</button>
+    <button class="pv-subbtn btn-blue" aria-label="1st Cordarone 300 mg">1st Cordarone 300 mg</button>
+    <button class="pv-subbtn btn-blue" aria-label="2nd Cordarone 150 mg">2nd Cordarone 150 mg</button>
+    <button class="pv-subbtn btn-blue" aria-label="1st Lidocaine 1-1.5 mg/kg">1st Lidocaine 1-1.5 mg/kg</button>
+    <button class="pv-subbtn btn-blue" aria-label="2nd Lidocaine 0.5-0.75 mg/kg">2nd Lidocaine 0.5-0.75 mg/kg</button>
+  </section>
+
+  <section id="vf-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย VF">
+    <button class="vf-subbtn btn-pink" aria-label="Defrib 200 J">Defrib 200 J</button>
+    <button id="adrenaline-vf-btn" class="btn-pink" aria-pressed="false" aria-label="Adenaline 1 :10,000">Adenaline 1 :10,000</button>
+    <button class="vf-subbtn btn-pink" aria-label="1st Cordarone 300 mg">1st Cordarone 300 mg</button>
+    <button class="vf-subbtn btn-pink" aria-label="2nd Cordarone 150 mg">2nd Cordarone 150 mg</button>
+    <button class="vf-subbtn btn-pink" aria-label="1st Lidocaine 1-1.5 mg/kg">1st Lidocaine 1-1.5 mg/kg</button>
+    <button class="vf-subbtn btn-pink" aria-label="2nd Lidocaine 0.5-0.75 mg/kg">2nd Lidocaine 0.5-0.75 mg/kg</button>
+  </section>
+
+  <section id="svt-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย SVT">
+    <button id="stable-svt-btn" class="btn-orange" aria-pressed="false" aria-label="1. Stable">1. Stable</button>
+    <button id="unstable-svt-btn" class="btn-orange" aria-pressed="false" aria-label="2. Unstable SVT">2. Unstable SVT</button>
+  </section>
+
+  <section id="stable-svt-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย Stable SVT">
+    <button class="svt-subbtn btn-orange" aria-label="Carotid massage">Carotid massage</button>
+    <button class="svt-subbtn btn-orange" aria-label="Valsalva (เป่า syringe 1 ml)">Valsalva (เป่า syringe 1 ml)</button>
+    <button class="svt-subbtn btn-orange" aria-label="Adenosine 6 mg">Adenosine 6 mg</button>
+    <button class="svt-subbtn btn-orange" aria-label="Adenosine 12 mg">Adenosine 12 mg</button>
+  </section>
+
+  <section id="unstable-svt-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย Unstable SVT">
+    <button class="svt-subbtn btn-orange" aria-label="Synchronized 50 J">Synchronized 50 J</button>
+    <button class="svt-subbtn btn-orange" aria-label="Synchronized 100 J">Synchronized 100 J</button>
+  </section>
+
+  <section id="sinus-tachycardia-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย Sinus Tachycardia">
+    <button class="sinus-subbtn btn-brown" aria-label="Synchronized 50 J">Synchronized 50 J</button>
+    <button class="sinus-subbtn btn-brown" aria-label="Synchronized 100 J">Synchronized 100 J</button>
+    <button class="sinus-subbtn btn-brown" aria-label="Labeterol 10 mg">Labeterol 10 mg</button>
+  </section>
+
+  <section id="af-subbuttons" class="button-row subbuttons" role="group" aria-label="เมนูย่อย AF">
+    <button class="af-subbtn btn-red" aria-label="Synchronized 50 J">Synchronized 50 J</button>
+    <button class="af-subbtn btn-red" aria-label="Synchronized 100 J">Synchronized 100 J</button>
+    <button class="af-subbtn btn-red" aria-label="Codarone 150 mg">Codarone 150 mg</button>
+    <button class="af-subbtn btn-red" aria-label="Codarone 600 mg">Codarone 600 mg</button>
+    <button class="af-subbtn btn-red" aria-label="Codarone 900 mg">Codarone 900 mg</button>
+  </section>
+
+  <!-- Reset and Save Buttons -->
+  <div class="button-row action-buttons">
+    <button id="reset-btn" class="btn-reset" aria-label="รีเซ็ตข้อมูล">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none" width="28" height="28" style="margin-bottom:6px;">
+        <path d="M4 4v6h6" />
+        <path d="M20.49 11a8.5 8.5 0 1 0-1.84 5.68" />
+      </svg>
+      RESET
+    </button>
+    <button id="save-btn" class="btn-save" aria-label="บันทึกข้อมูล" disabled>
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" fill="none" width="28" height="28" style="margin-bottom:6px;">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+        <polyline points="17 21 17 13 7 13 7 21"/>
+        <polyline points="7 3 7 8 15 8"/>
+      </svg>
+      SAVE
+    </button>
+  </div>
+
+  <h2>บันทึกข้อมูล CPR</h2>
+  <aside class="log-area" id="log-area" aria-live="polite" aria-atomic="false"></aside>
+
+  <div id="summary" aria-live="polite" aria-atomic="true" role="region" aria-label="สรุปเวลาที่ CPR"></div>
+</main>
+
+<div id="alert-overlay" role="alert" aria-live="assertive" aria-atomic="true" tabindex="0" aria-label="ข้อความแจ้งเตือน"></div>
+
+<audio id="alert-sound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
+
+<script>
+(() => {
+  // Elements
+  const startBtn = document.getElementById('start-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const ekgBtn = document.getElementById('ekg-btn');
+  const ekgSub = document.getElementById('ekg-subbuttons');
+  const bradySub = document.getElementById('bradycardia-subbuttons');
+  const asySub = document.getElementById('asystole-subbuttons');
+  const peaSub = document.getElementById('pea-subbuttons');
+  const pvSub = document.getElementById('pulseless-vt-subbuttons');
+  const vfSub = document.getElementById('vf-subbuttons');
+  const svtSub = document.getElementById('svt-subbuttons');
+  const stableSvtSub = document.getElementById('stable-svt-subbuttons');
+  const unstableSvtSub = document.getElementById('unstable-svt-subbuttons');
+  const sinusTachySub = document.getElementById('sinus-tachycardia-subbuttons');
+  const afSub = document.getElementById('af-subbuttons');
+
+  const atropineBtn = document.getElementById('atropine-btn');
+
+  const resetBtn = document.getElementById('reset-btn');
+  const saveBtn = document.getElementById('save-btn');
+
+  const backBtn = document.getElementById('back-btn');
+  const backContainer = document.getElementById('back-container');
+
+  const logArea = document.getElementById('log-area');
+  const summaryDiv = document.getElementById('summary');
+  const mainTimerDisplay = document.getElementById('main-timer');
+  const alertOverlay = document.getElementById('alert-overlay');
+  const alertSound = document.getElementById('alert-sound');
+
+  // State & timers
+  let mainTimer = null;
+  let mainSeconds = 0;
+  let lastAlertMinute = 0; // ตัวแปรเก็บนาทีแจ้งเตือนล่าสุด
+
+  // Atropine timer state
+  let atropineTimer = null;
+  let atropineSeconds = 0;
+  let atropineCount = 0;
+  const atropineMaxCount = 3;
+
+  // Adrenaline timer state
+  let adrenalineTimer = null;
+  let adrenalineSeconds = 0;
+
+  let activeAdrenalineBtn = null;
+
+  // All adenaline buttons in all menus
+  const allAdrenalineButtons = [
+    document.getElementById('adrenaline-asy-btn'),
+    document.getElementById('adrenaline-pea-btn'),
+    document.getElementById('adrenaline-pv-btn'),
+    document.getElementById('adrenaline-vf-btn')
+  ];
+
+  let cprStartTime = null;
+  let cprStopTime = null;
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  function getCurrentTime() {
+    return new Date().toTimeString().split(' ')[0];
+  }
+
+  function logEvent(text) {
+    const skipPhrases = [
+      'Toggle เมนูย่อย EKG (เปิด:true)',
+      'Toggle เมนูย่อย EKG (เปิด:false)',
+      'เปิดเมนูย่อย',
+      'กลับสู่เมนูหลัก EKG'
+    ];
+    if (skipPhrases.includes(text)) {
+      return;
+    }
+    const currentTime = getCurrentTime();
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    entry.textContent = `[${currentTime}] ${text}`;
+    logArea.appendChild(entry);
+    logArea.scrollTop = logArea.scrollHeight;
+    saveBtn.disabled = false;
+  }
+
+  function showAlert(message, duration = 5000) {
+    alertOverlay.textContent = message;
+    alertOverlay.classList.add("show");
+    alertSound.play();
+    alertOverlay.focus();
+    setTimeout(() => {
+      alertOverlay.classList.remove("show");
+    }, duration);
+  }
+
+  function enableAllButtons(enable) {
+    document.querySelectorAll('button').forEach(btn => {
+      if (btn === resetBtn || btn === saveBtn || btn === backBtn) return;
+      btn.disabled = !enable;
+    });
+  }
+
+  function showSummary() {
+    if (!cprStartTime || !cprStopTime) return;
+    let diffMs = cprStopTime - cprStartTime;
+    if (diffMs < 0) diffMs = 0;
+    const totalSeconds = Math.floor(diffMs / 1000);
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    summaryDiv.textContent = `สรุปเวลาที่ CPR: เริ่มเวลา ${cprStartTime.toTimeString().split(' ')[0]} - หยุดเวลา ${cprStopTime.toTimeString().split(' ')[0]} (${m} นาที ${s} วินาที)`;
+  }
+
+  function closeAllSubmenus() {
+    [bradySub, asySub, peaSub, pvSub, vfSub, svtSub, stableSvtSub, unstableSvtSub, sinusTachySub, afSub].forEach(s => {
+      if (s) s.classList.remove('active');
+    });
+    ekgSub.classList.add('active');
+    backContainer.style.display = 'none';
+    ekgBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  // Start main CPR timer
+  function startMainTimer() {
+    if (mainTimer) return;
+    cprStartTime = new Date();
+    cprStopTime = null;
+    summaryDiv.textContent = '';
+    mainSeconds = 0;
+    lastAlertMinute = 0; // reset ตัวแปรแจ้งเตือนตอนเริ่มจับเวลา
+    mainTimerDisplay.textContent = formatTime(mainSeconds);
+    mainTimer = setInterval(() => {
+      mainSeconds++;
+      mainTimerDisplay.textContent = formatTime(mainSeconds);
+
+      // แจ้งเตือนทุก 2 นาที (120 วินาที)
+      if (mainSeconds >= 120 && Math.floor(mainSeconds / 120) > lastAlertMinute) {
+        lastAlertMinute = Math.floor(mainSeconds / 120);
+        showAlert(`ครบ ${lastAlertMinute * 2} นาที`, 5000);
+      }
+
+    }, 1000);
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    resetBtn.disabled = true;
+    saveBtn.disabled = true;
+    backContainer.style.display = 'none';
+    startBtn.setAttribute('aria-pressed', 'true');
+    stopBtn.setAttribute('aria-pressed', 'false');
+    logEvent('START CPR');
+
+    atropineCount = 0;
+    atropineBtn.disabled = false;
+    atropineBtn.setAttribute('aria-pressed', 'false');
+
+    if (atropineTimer) { clearInterval(atropineTimer); atropineTimer = null; }
+    if (adrenalineTimer) { clearInterval(adrenalineTimer); adrenalineTimer = null; resetAllAdrenalineButtons(); }
+
+    enableAllButtons(true);
+  }
+
+  // Stop main CPR timer
+  function stopMainTimer() {
+    if (!mainTimer) return;
+    clearInterval(mainTimer);
+    mainTimer = null;
+    cprStopTime = new Date();
+    startBtn.disabled = true;
+    stopBtn.disabled = true;
+    resetBtn.disabled = false;
+    saveBtn.disabled = false;
+    startBtn.setAttribute('aria-pressed', 'false');
+    stopBtn.setAttribute('aria-pressed', 'true');
+
+    const patientName = document.getElementById('patient-name').value.trim();
+    const hn = document.getElementById('hn').value.trim();
+    const an = document.getElementById('an').value.trim();
+
+    let patientInfoLog = '';
+    if (patientName || hn || an) {
+      patientInfoLog = ' | ข้อมูลผู้ป่วย: ';
+      if (patientName) patientInfoLog += `ชื่อ: ${patientName} `;
+      if (hn) patientInfoLog += `HN: ${hn} `;
+      if (an) patientInfoLog += `AN: ${an}`;
+    }
+
+    logEvent(`STOP CPR (รวม ${Math.floor((cprStopTime - cprStartTime)/60000)} นาที ${Math.floor(((cprStopTime - cprStartTime) % 60000) / 1000)} วินาที)${patientInfoLog}`);
+
+    showSummary();
+
+    if (atropineTimer) { clearInterval(atropineTimer); atropineTimer = null; }
+    if (adrenalineTimer) { clearInterval(adrenalineTimer); adrenalineTimer = null; resetAllAdrenalineButtons(); }
+
+    enableAllButtons(false);
+    resetBtn.disabled = false;
+    saveBtn.disabled = false;
+    backContainer.style.display = 'none';
+  }
+
+  // Atropine timer logic
+  function startAtropineTimer() {
+    if (atropineCount > atropineMaxCount || atropineTimer) return;
+
+    atropineBtn.disabled = atropineCount >= atropineMaxCount;
+    atropineBtn.setAttribute('aria-pressed', 'true');
+    const currTime = formatTime(mainSeconds);
+
+    if (atropineCount >= atropineMaxCount) {
+      atropineBtn.textContent = "Atropineครบจำนวน 3 ครั้ง";
+      logEvent(`Atropineครบจำนวน 3 ครั้ง ที่เวลา ${currTime}`);
+    } else {
+      atropineBtn.textContent = `Atropine 1 mg (${atropineCount})`;
+      logEvent(`Atropine ครั้งที่ ${atropineCount} ที่เวลา ${currTime}`);
+    }
+
+    atropineSeconds = 0;
+    if (atropineTimer) clearInterval(atropineTimer);
+
+    atropineTimer = setInterval(() => {
+      atropineSeconds++;
+      if (atropineSeconds >= 180) {
+        clearInterval(atropineTimer);
+        atropineTimer = null;
+        showAlert("ครบเวลา Atropine 1 mg", 7000);
+        logEvent("ครบเวลา Atropine 1 mg");
+        atropineBtn.setAttribute("aria-pressed", "false");
+      }
+    }, 1000);
+  }
+
+  // Reset all adrenaline buttons: enable and aria-pressed false
+  function resetAllAdrenalineButtons() {
+    allAdrenalineButtons.forEach(btn => {
+      if (btn) {
+        btn.disabled = false;
+        btn.setAttribute("aria-pressed", "false");
+      }
+    });
+    activeAdrenalineBtn = null;
+  }
+
+  // Start adrenaline 3-minute timer, disable all adrenaline buttons
+  function startAdrenalineTimer(clickedBtn) {
+    if (adrenalineTimer) return; // ignore if timer already running
+    adrenalineSeconds = 0;
+    activeAdrenalineBtn = clickedBtn;
+
+    // Disable all adrenaline buttons, set pressed true only on clicked button
+    allAdrenalineButtons.forEach(btn => {
+      if (btn) {
+        btn.disabled = true;
+        btn.setAttribute("aria-pressed", btn === clickedBtn ? "true" : "false");
+      }
+    });
+
+    logEvent("Adenaline 1 :10,000 เริ่มจับเวลา");
+
+    adrenalineTimer = setInterval(() => {
+      adrenalineSeconds++;
+      if (adrenalineSeconds >= 180) {
+        clearInterval(adrenalineTimer);
+        adrenalineTimer = null;
+        showAlert("ครบเวลา Adenaline 1 :10,000", 7000);
+        logEvent("ครบเวลา Adenaline 1 :10,000");
+        resetAllAdrenalineButtons();
+      }
+    }, 1000);
+  }
+
+  // EKG submenu hide on load
+  ekgSub.classList.remove('active');
+  ekgBtn.setAttribute('aria-expanded', 'false');
+  backContainer.style.display = 'none';
+
+  // Main EKG toggle button
+  ekgBtn.addEventListener('click', () => {
+    if (ekgSub.classList.contains('active')) {
+      ekgSub.classList.remove('active');
+      ekgBtn.setAttribute('aria-expanded', 'false');
+      backContainer.style.display = 'none';
+
+      [bradySub, asySub, peaSub, pvSub, vfSub, svtSub, stableSvtSub, unstableSvtSub, sinusTachySub, afSub].forEach(s => {
+        if (s) s.classList.remove('active');
+      });
+      logEvent('Toggle เมนูย่อย EKG (เปิด:false)');
+    } else {
+      [bradySub, asySub, peaSub, pvSub, vfSub, svtSub, stableSvtSub, unstableSvtSub, sinusTachySub, afSub].forEach(s => {
+        if (s) s.classList.remove('active');
+      });
+      ekgSub.classList.add('active');
+      ekgBtn.setAttribute('aria-expanded', 'true');
+      backContainer.style.display = 'none';
+      logEvent('Toggle เมนูย่อย EKG (เปิด:true)');
+    }
+  });
+
+  // Back button closes submenu and returns to main EKG
+  backBtn.addEventListener('click', () => {
+    [bradySub, asySub, peaSub, pvSub, vfSub, svtSub, stableSvtSub, unstableSvtSub, sinusTachySub, afSub].forEach(s => {
+      if (s) s.classList.remove('active');
+    });
+    ekgSub.classList.add('active');
+    backContainer.style.display = 'none';
+    ekgBtn.setAttribute('aria-expanded', 'true');
+    logEvent('กลับสู่เมนูหลัก EKG');
+  });
+
+  // Submenu open on main submenu click
+  document.querySelectorAll('#ekg-subbuttons button.ekg-subbtn').forEach(button => {
+    button.addEventListener('click', e => {
+      const dataSub = e.currentTarget.dataset.sub;
+      if (!dataSub) return;
+
+      ekgSub.classList.remove('active');
+      backContainer.style.display = 'flex';
+      ekgBtn.setAttribute('aria-expanded', 'false');
+      [bradySub, asySub, peaSub, pvSub, vfSub, svtSub, stableSvtSub, unstableSvtSub, sinusTachySub, afSub].forEach(s => {
+        if (s) s.classList.remove('active');
+      });
+
+      const targetSubmenu = document.getElementById(`${dataSub}-subbuttons`);
+      if (targetSubmenu) targetSubmenu.classList.add('active');
+
+      logEvent('เปิดเมนูย่อย');
+    });
+  });
+
+  // Add logging and timer start for adrenaline and other buttons
+  function addLogForSelector(selector) {
+    document.querySelectorAll(selector).forEach(btn => {
+      btn.addEventListener('click', () => {
+        // For adrenaline buttons, log only when timer starts
+        if (allAdrenalineButtons.includes(btn)) {
+          if (!adrenalineTimer) {
+            startAdrenalineTimer(btn);
+          }
+        } else {
+          logEvent(btn.textContent);
+        }
+      });
+    });
+  }
+
+  addLogForSelector('.brady-subbtn');
+  addLogForSelector('.asy-subbtn');
+  addLogForSelector('.pea-subbtn');
+  addLogForSelector('.pv-subbtn');
+  addLogForSelector('.vf-subbtn');
+  addLogForSelector('.svt-subbtn');
+  addLogForSelector('.sinus-subbtn');
+  addLogForSelector('.af-subbtn');
+
+  // Add logging + functionality for adrenaline buttons explicitly
+  addLogForSelector('#adrenaline-asy-btn');
+  addLogForSelector('#adrenaline-pea-btn');
+  addLogForSelector('#adrenaline-pv-btn');
+  addLogForSelector('#adrenaline-vf-btn');
+
+  // Stable and unstable SVT submenu buttons open submenu
+  document.getElementById('stable-svt-btn').addEventListener('click', () => {
+    ekgSub.classList.remove('active');
+    backContainer.style.display = 'flex';
+    ekgBtn.setAttribute('aria-expanded', 'false');
+    [bradySub, asySub, peaSub, pvSub, vfSub, svtSub, stableSvtSub, unstableSvtSub, sinusTachySub, afSub].forEach(s => {
+      if (s) s.classList.remove('active');
+    });
+    stableSvtSub.classList.add('active');
+    logEvent('Stable SVT');
+  });
+
+  document.getElementById('unstable-svt-btn').addEventListener('click', () => {
+    ekgSub.classList.remove('active');
+    backContainer.style.display = 'flex';
+    ekgBtn.setAttribute('aria-expanded', 'false');
+    [bradySub, asySub, peaSub, pvSub, vfSub, svtSub, stableSvtSub, unstableSvtSub, sinusTachySub, afSub].forEach(s => {
+      if (s) s.classList.remove('active');
+    });
+    unstableSvtSub.classList.add('active');
+    logEvent('Unstable SVT');
+  });
+
+  // Reset button reloads page
+  resetBtn.addEventListener('click', () => {
+    window.location.reload();
+  });
+
+  // Save data as Word document
+  saveBtn.addEventListener('click', () => {
+    const logText = logArea.textContent;
+    if (!logText.trim()) {
+      alert('ไม่มีข้อมูล CPR ให้บันทึก');
+      return;
+    }
+    const htmlContent = `
+      <html xmlns:o='urn:schemas-microsoft-com:office:office'
+            xmlns:w='urn:schemas-microsoft-com:office:word'
+            xmlns='http://www.w3.org/TR/REC-html40'>
+      <head><title>CPR log</title>
+      <style>
+        body { font-family: 'Athiti', sans-serif; color:#6b7280; font-size:16pt; }
+        p { margin: 0 0 10pt 0; }
+      </style>
+      </head>
+      <body>
+        <p>${logText.replace(/\n/g, '<br>')}</p>
+      </body>
+      </html>`;
+    const blob = new Blob(['\ufeff', htmlContent], {type: 'application/msword'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `CPR_Log_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.doc`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, 0);
+  });
+
+  // Start and Stop button handlers
+  startBtn.addEventListener('click', () => {
+    startMainTimer();
+    enableAllButtons(true);
+    saveBtn.disabled = true;
+    resetBtn.disabled = true;
+    backContainer.style.display = 'none';
+  });
+
+  stopBtn.addEventListener('click', () => {
+    stopMainTimer();
+    enableAllButtons(false);
+    saveBtn.disabled = false;
+    resetBtn.disabled = false;
+    backContainer.style.display = 'none';
+  });
+
+  // Atropine button counter and timer
+  atropineBtn.addEventListener('click', () => {
+    if (atropineCount < atropineMaxCount) {
+      atropineCount++;
+      startAtropineTimer();
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
+
