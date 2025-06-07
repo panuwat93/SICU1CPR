@@ -4,8 +4,8 @@
   "description": "แอป CPR ธีมไซไฟพร้อมจับเวลา และบันทึกข้อมูลอย่างมืออาชีพ",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0a0f1a",
-  "theme_color": "#00ffea",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -20,4 +20,3 @@
     }
   ]
 }
-
