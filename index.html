@@ -3,31 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SMART CPR - Sci-Fi Theme</title>
+<title>SMART CPR - Formal Theme</title>
 
 <!-- Manifest for PWA -->
 <link rel="manifest" href="manifest.json" />
 
-<!-- Import Orbitron font for sci-fi vibe -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Athiti:wght@400;700&display=swap" rel="stylesheet" />
+<!-- Import Inter & Athiti fonts for formal and readable typography -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Athiti:wght@400;700&display=swap" rel="stylesheet" />
 
 <style>
   :root {
-    /* Sci-Fi Neon Dark Theme Palette */
-    --color-bg: #0a0f1a;
-    --color-primary: #00ffea; /* Neon cyan for primary headings and highlights */
-    --color-secondary: #ff00d6; /* Neon magenta for accents */
-    --color-text-primary: #e0fbfc; /* Soft bright text */
-    --color-text-secondary: #7fdbff; /* Soft blue for less emphasis text */
-    --color-border: #004f5b; /* Dark teal border */
-    --color-shadow: rgba(0, 255, 234, 0.4);
-    --color-button-bg: #005f73;
-    --color-button-bg-hover: #008891;
-    --font-family-sf: 'Orbitron', 'Athiti', sans-serif;
+    /* Formal Light Theme Palette */
+    --color-bg: #ffffff;
+    --color-primary: #2563eb; /* Blue 600 for primary headings and highlights */
+    --color-secondary: #2563ebcc; /* Slightly transparent blue for accents */
+    --color-text-primary: #111827; /* Very dark grey for main text */
+    --color-text-secondary: #6b7280; /* Neutral gray for normal text */
+    --color-border: #d1d5db; /* Light gray border */
+    --color-shadow: rgba(37, 99, 235, 0.15);
+    --color-button-bg: #2563eb;
+    --color-button-bg-hover: #1e40af;
+    --font-family-sf: 'Inter', 'Athiti', sans-serif;
 
-    /* Glow shadows */
-    --glow-primary: 0 0 8px #00ffea, 0 0 20px #00ffea;
-    --glow-secondary: 0 0 6px #ff00d6, 0 0 15px #ff00d6;
+    /* Shadows */
+    --shadow-soft: 0 4px 8px rgba(0,0,0,0.05);
+    --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.4);
   }
 
   /* Reset and base styles */
@@ -41,7 +41,7 @@
     font-family: var(--font-family-sf);
     color: var(--color-text-secondary);
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
@@ -55,26 +55,24 @@
     padding: 0 1rem;
   }
 
-  /* Position SMART CPR on top by order */
+  /* Headline */
   h1 {
     order: -1; /* ensures h1 is rendered before others */
-    font-family: 'Orbitron', sans-serif;
-    font-size: 72px;
+    font-family: 'Inter', sans-serif;
+    font-size: 56px;
     font-weight: 700;
     text-align: center;
     color: var(--color-primary);
     margin-bottom: 3rem;
     letter-spacing: 0.05em;
-    text-shadow: var(--glow-primary);
   }
-  
-  /* Patient info card - neon glass morphism */
+
+  /* Patient info card - light glass effect */
   #patient-info {
-    background: rgba(0, 255, 234, 0.07);
-    backdrop-filter: blur(8px) saturate(180%);
-    border-radius: 1rem;
+    background: #ffffff;
+    border-radius: 0.75rem;
     border: 1px solid var(--color-border);
-    box-shadow: var(--glow-primary);
+    box-shadow: var(--shadow-soft);
     padding: 1.75rem 2.5rem;
     color: var(--color-text-primary);
     display: flex;
@@ -93,50 +91,46 @@
     font-size: 1.1rem;
     margin-bottom: 0.4rem;
     color: var(--color-primary);
-    text-shadow: var(--glow-primary);
   }
   #patient-info input[type="text"] {
     border: 1px solid var(--color-border);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     padding: 0.6rem 0.9rem;
     font-size: 1.1rem;
     font-family: var(--font-family-sf);
     color: var(--color-text-primary);
-    background: rgba(0, 255, 234, 0.12);
+    background: #f9fafb;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 4px #004f5b inset;
   }
   #patient-info input[type="text"]:focus {
     outline: none;
-    border-color: var(--color-secondary);
-    box-shadow: var(--glow-secondary);
-    background: rgba(255, 0, 214, 0.15);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
+    background: #fff;
   }
 
   h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
     font-weight: 700;
-    color: var(--color-secondary);
+    color: var(--color-primary);
     margin-top: 4rem;
     margin-bottom: 1.5rem;
-    text-shadow: var(--glow-secondary);
   }
 
-  /* Timer display with neon glow */
+  /* Timer display with clean style */
   .timer-display {
-    font-family: 'Orbitron', monospace;
-    font-size: 96px;
+    font-family: 'Inter', monospace;
+    font-size: 80px;
     font-weight: 700;
     text-align: center;
     color: var(--color-primary);
     font-variant-numeric: tabular-nums;
     user-select: none;
     padding: 1.5rem 0 2.5rem;
-    text-shadow: var(--glow-primary);
   }
 
-  /* Buttons base with futuristic neon style - smaller */
+  /* Buttons base - formal style */
   .button-row {
     display: flex;
     flex-wrap: wrap;
@@ -148,12 +142,12 @@
     -webkit-appearance: none;
     outline: none;
     border: 2px solid transparent;
-    border-radius: 1rem;
-    background-color: transparent;
-    color: var(--color-primary);
-    font-family: 'Orbitron', sans-serif;
+    border-radius: 0.75rem;
+    background-color: var(--color-button-bg);
+    color: white;
+    font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
-    font-weight: 800;
+    font-weight: 600;
     padding: 0.9rem 0.9rem 0.7rem;
     width: 120px;
     height: 120px;
@@ -168,12 +162,12 @@
       box-shadow 0.3s ease,
       transform 0.3s ease,
       border-color 0.3s ease;
-    box-shadow: 0 0 12px #00fff7aa;
+    box-shadow: var(--shadow-soft);
     user-select: none;
     line-height: 1.2;
   }
   button svg {
-    stroke: var(--color-primary);
+    stroke: white;
     stroke-width: 2.5;
     fill: none;
     width: 40px;
@@ -181,47 +175,42 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     margin-bottom: 0.4rem;
-    filter: drop-shadow(0 0 3px var(--color-primary));
+    filter: none;
   }
   button:focus-visible {
-    outline: 3px solid var(--color-secondary);
+    outline: 3px solid var(--color-primary);
     outline-offset: 4px;
   }
   button:not(:disabled):hover {
-    background-color: var(--color-primary);
-    color: var(--color-bg);
-    border-color: var(--color-secondary);
-    box-shadow:
-      0 0 18px var(--color-primary),
-      0 0 20px var(--color-secondary),
-      0 0 22px var(--color-secondary);
-    transform: translateY(-2px) scale(1.06);
+    background-color: var(--color-button-bg-hover);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    transform: translateY(-2px) scale(1.05);
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
   button:disabled {
-    opacity: 0.3;
+    opacity: 0.5;
     cursor: default;
     box-shadow: none;
     transform: none;
-    color: #23505f;
-    background-color: transparent;
-    border-color: #003040;
+    color: #9ca3af;
+    background-color: #e5e7eb;
+    border-color: #d1d5db;
   }
 
-  /* Neon color variants for buttons */
-  .btn-green { border-color: #00ffea; color: #00ffea; }
-  .btn-red { border-color: #ff00d6; color: #ff00d6; }
-  .btn-blue { border-color: #4bcaff; color: #4bcaff; }
-  .btn-yellow { border-color: #ffdd00; color: #ffdd00; }
-  .btn-purple { border-color: #bf00ff; color: #bf00ff; }
-  .btn-pink { border-color: #ff40b4; color: #ff40b4; }
-  .btn-orange { border-color: #ff6f00; color: #ff6f00; }
-  .btn-brown { border-color: #663300; color: #663300; }
-  .btn-reset { border-color: #008080; color: #008080; }
-  .btn-save { border-color: var(--color-primary); color: var(--color-primary); }
-  .btn-back { border-color: #006666; color: #006666; }
+  /* Button color variants with subtle border only */
+  .btn-green { background-color: #059669; border-color: #059669; }
+  .btn-red { background-color: #dc2626; border-color: #dc2626; }
+  .btn-blue { background-color: #2563eb; border-color: #2563eb; }
+  .btn-yellow { background-color: #eab308; border-color: #eab308; }
+  .btn-purple { background-color: #7c3aed; border-color: #7c3aed; }
+  .btn-pink { background-color: #db2777; border-color: #db2777; }
+  .btn-orange { background-color: #ea580c; border-color: #ea580c; }
+  .btn-brown { background-color: #713f12; border-color: #713f12; }
+  .btn-reset { background-color: #0d9488; border-color: #0d9488; }
+  .btn-save { background-color: var(--color-primary); border-color: var(--color-primary); }
+  .btn-back { background-color: #164e63; border-color: #164e63; }
 
-  /* Submenus with neon glow */
+  /* Submenus */
   .subbuttons {
     display: none;
     flex-wrap: wrap;
@@ -232,53 +221,48 @@
     display: flex;
   }
 
-  /* Log area - transparent dark glass - neon text */
+  /* Log area - clean, subtle shadow and border */
   .log-area {
-    background: rgba(0, 15, 30, 0.6);
-    border-radius: 1rem;
+    background: #f9fafb;
+    border-radius: 0.75rem;
     padding: 1.75rem 2.5rem;
     max-height: 320px;
     overflow-y: auto;
-    color: var(--color-primary);
+    color: var(--color-text-primary);
     font-family: 'Courier New', monospace;
     font-size: 16px;
     border: 1px solid var(--color-border);
-    box-shadow: 0 0 20px var(--color-primary);
+    box-shadow: var(--shadow-soft);
     white-space: pre-wrap;
     line-height: 1.5;
-    text-shadow:
-      0 0 2px #00fff7,
-      0 0 5px #00fff7,
-      0 0 8px #00fff7;
   }
   .log-entry {
     margin-bottom: 0.5rem;
   }
 
-  /* Summary box - neon cyan */
+  /* Summary box - light */
   #summary {
-    background: rgba(0, 255, 234, 0.15);
-    color: var(--color-primary);
-    font-family: 'Orbitron', sans-serif;
+    background: #f3f4f6;
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 700;
     padding: 1.75rem 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 30px var(--color-primary);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-soft);
     white-space: pre-line;
     text-align: center;
-    text-shadow: var(--glow-primary);
   }
 
-  /* Alert Overlay with strong neon glow */
+  /* Alert Overlay clean */
   #alert-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(5, 10, 20, 0.95);
+    background: rgba(255, 255, 255, 0.95);
     color: var(--color-primary);
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4rem;
-    font-weight: 900;
+    font-family: 'Inter', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -289,11 +273,7 @@
     pointer-events: none;
     user-select: none;
     transition: opacity 0.4s ease;
-    text-shadow:
-      0 0 10px #00fff7,
-      0 0 20px #00fff7,
-      0 0 40px #00fff7,
-      0 0 80px #00fff7;
+    box-shadow: 0 0 12px var(--color-primary);
     z-index: 9999;
   }
   #alert-overlay.show {
@@ -315,10 +295,10 @@
     button {
       width: 110px;
       height: 110px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
     .timer-display {
-      font-size: 64px;
+      font-size: 56px;
     }
     #patient-info {
       max-width: 100%;
